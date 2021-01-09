@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["user"],{c6fe:function(e,n,t){"use strict";t.r(n);var u=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div",[e._v("注册页")])},c=[],l={},r=l,s=t("2877"),a=Object(s["a"])(r,u,c,!1,null,null,null);n["default"]=a.exports}}]);
+//# sourceMappingURL=user.e39ce271.js.map
