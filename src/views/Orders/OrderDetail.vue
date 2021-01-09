@@ -8,16 +8,20 @@
         }
       "
     />
-    {{ this.$route.query.id }}
-    <Card>
+    <!-- {{ this.$route.query.id }} -->
+    <Card v-if="this.detail != null">
       <DescriptionList
         size="large"
         title="基本信息"
         style="margin-bottom: 32px;"
       >
         <Description term="订单编号">{{ this.$route.query.id }}</Description>
-        <Description term="用户账号">asdfvdav123</Description>
-        <Description term="交易时间">2020-10-10</Description>
+        <Description term="用户账号">{{
+          this.detail[0].accountname
+        }}</Description>
+        <Description term="交易时间">{{
+          timeFormat(this.detail[0].rackingtime)
+        }}</Description>
         <Description term="备注">无</Description>
       </DescriptionList>
       <Divider style="margin-bottom: 32px;" />
@@ -26,9 +30,13 @@
         title="收货人信息"
         style="margin-bottom: 32px;"
       >
-        <Description term="用户姓名">付小小</Description>
-        <Description term="联系电话">18100000000</Description>
-        <Description term="取货地址">浙江省杭州市西湖区万塘路18号</Description>
+        <Description term="用户姓名">{{
+          this.detail[0].orderingName
+        }}</Description>
+        <Description term="联系电话">{{
+          this.detail[0].orderingPhone
+        }}</Description>
+        <Description term="取货地址">{{ this.detail[0].address }}</Description>
       </DescriptionList>
       <Divider style="margin-bottom: 32px;" />
       <DescriptionList
@@ -47,6 +55,7 @@
 </template>
 
 <script>
+import { orderDetail } from "@/api/orders.js";
 import DescriptionList from "@/components/DescriptionList";
 import { Divider, Card } from "ant-design-vue";
 const { Description } = DescriptionList;
@@ -107,7 +116,8 @@ export default {
   data() {
     return {
       data,
-      columns
+      columns,
+      detail: null
     };
   },
   components: {
@@ -115,6 +125,20 @@ export default {
     Description,
     Divider,
     Card
+  },
+  created() {
+    console.log(this.$route.query.id);
+    // let orderingid = this.$route.query.id;
+    orderDetail({ orderingid: this.$route.query.id }).then(res => {
+      this.detail = res.data.listOrder;
+      console.log(res);
+      console.log(this.detail);
+    });
+  },
+  methods: {
+    timeFormat(time) {
+      return this.$moment(time).format("YYYY-MM-DD HH:mm:ss");
+    }
   }
 };
 </script>
