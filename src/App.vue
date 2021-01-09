@@ -1,35 +1,29 @@
 <template>
   <div id="app">
-      <router-view></router-view>
+    <!-- <div id="nav">
+      <a-button>按钮</a-button>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div> -->
+    <router-view />
   </div>
 </template>
 
-<script>
-
-export default {
-  name: 'App',
-  components: {
-    
-  }
-}
-</script>
-
 <style lang="less">
-
-html{
-
-  height:100%;
-  width:100%;
-}
-body{
-  position: relative;
-  height:100%;
-  width:100%;
-}
-#app{
-
-  height:100%;
-  width:100%;
-
+// html {
+//   height: 100%;
+//   width: 100%;
+// }
+// body {
+//   position: relative;
+//   height: 100%;
+//   width: 100%;
+// }
+// #app {
+//   height: 100%;
+//   width: 100%;
+// }
+#app {
+  height: 100%;
 }
 </style>
