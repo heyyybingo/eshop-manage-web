@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <div
+    v-if="data != null && brand != null && banner != null && goodType != null"
+  >
     <div class="container">
       <span style="color: #303133"
         ><a-icon type="unordered-list" /> 筛选搜索</span
