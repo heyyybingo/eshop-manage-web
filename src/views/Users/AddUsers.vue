@@ -80,9 +80,9 @@ export default {
   },
   methods: {
     addSubmit(user) {
-      console.log(user);
-      user.avator =
+      user.avatar =
         "https://wx1.sinaimg.cn/mw690/0078MmVqly1gmha343japj302x02xt8v.jpg";
+      console.log(user);
       addUser(user).then(res => {
         if (res.data.code === 0) {
           this.$success({
