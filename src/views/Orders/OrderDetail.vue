@@ -22,6 +22,9 @@
         <Description term="交易时间">{{
           timeFormat(this.detail[0].rackingtime)
         }}</Description>
+        <Description term="交易金额">{{
+          "￥" + this.detail[0].orderingPrice
+        }}</Description>
         <Description term="备注">无</Description>
       </DescriptionList>
       <Divider style="margin-bottom: 32px;" />
@@ -41,12 +44,17 @@
       <Divider style="margin-bottom: 32px;" />
       <DescriptionList
         size="large"
-        title="商品信息"
+        title="订单明细"
         style="margin-bottom: 32px;"
       >
-        <a-table :columns="columns" :data-source="data" :pagination="false">
+        <a-table
+          :columns="columns"
+          :data-source="detail"
+          :pagination="false"
+          rowKey="productName"
+        >
           <template v-slot:action="record">
-            {{ record.price * record.num }}
+            {{ "￥" + record.productPrice * record.number }}
           </template>
         </a-table>
       </DescriptionList>
@@ -63,23 +71,23 @@ const { Description } = DescriptionList;
 const columns = [
   {
     title: "商品名称",
-    key: "name",
-    dataIndex: "name"
+    key: "productName",
+    dataIndex: "productName"
   },
   {
     title: "商品类型",
-    dataIndex: "type",
-    key: "type"
+    dataIndex: "typeid",
+    key: "typeid"
   },
   {
     title: "价格",
-    dataIndex: "price",
-    key: "price"
+    dataIndex: "productPrice",
+    key: "productPrice"
   },
   {
     title: "数量",
-    key: "num",
-    dataIndex: "num"
+    key: "number",
+    dataIndex: "number"
   },
   {
     title: "小计",
