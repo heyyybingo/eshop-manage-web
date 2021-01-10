@@ -13,7 +13,11 @@
         <a-form-item v-bind="formItemLayout" label="用户头像">
           <a-upload
             name="file"
-            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            :action="
+              `http://120.79.1.207:8080/aokimall_admin/backAdmin/banner/upload`
+            "
+            @change="handleChange"
+            :multiple="false"
           >
             <a-button> <a-icon type="upload" /> Click to Upload </a-button>
           </a-upload>
@@ -53,6 +57,7 @@ import { addUser } from "@/api/users.js";
 export default {
   data() {
     return {
+      uploadimg: "",
       user: {},
       formItemLayout: {
         labelCol: {
@@ -79,9 +84,21 @@ export default {
     };
   },
   methods: {
+    handleChange(info) {
+      if (info.file.status === "done") {
+        if (info.file.response.data) {
+          let data = info.file.response.data;
+          this.uploadimg = data;
+        }
+      }
+      if (info.file.status === "error") {
+        this.$message.error("上传失败");
+      }
+    },
     addSubmit(user) {
-      user.avatar =
-        "https://wx1.sinaimg.cn/mw690/0078MmVqly1gmha343japj302x02xt8v.jpg";
+      // user.avatar =
+      //   "https://wx1.sinaimg.cn/mw690/0078MmVqly1gmha343japj302x02xt8v.jpg";
+      user.avatar = this.uploadimg;
       console.log(user);
       addUser(user).then(res => {
         if (res.data.code === 0) {

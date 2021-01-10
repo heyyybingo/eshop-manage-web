@@ -305,11 +305,11 @@ const columns = [
     key: "stock",
     dataIndex: "stock"
   },
-  {
-    title: "总量",
-    key: "total",
-    dataIndex: "total"
-  },
+  // {
+  //   title: "总量",
+  //   key: "total",
+  //   dataIndex: "total"
+  // },
   {
     title: "是否上架",
     key: "racking",

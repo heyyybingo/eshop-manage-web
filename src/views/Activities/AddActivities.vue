@@ -28,7 +28,11 @@
         <a-form-item label="活动图片">
           <a-upload
             name="file"
-            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            :action="
+              `http://120.79.1.207:8080/aokimall_admin/backAdmin/banner/upload`
+            "
+            @change="handleChange"
+            :multiple="false"
           >
             <a-button> <a-icon type="upload" /> Click to Upload </a-button>
           </a-upload>
@@ -52,10 +56,13 @@
 
 <script>
 import { addActivities } from "@/api/activities.js";
+import request from "../../axios";
 
 export default {
   data() {
     return {
+      request,
+      uploadimg: "",
       loading: false,
       imageUrl: "",
       activity: {},
@@ -84,13 +91,23 @@ export default {
     };
   },
   methods: {
+    handleChange(info) {
+      if (info.file.status === "done") {
+        if (info.file.response.data) {
+          let data = info.file.response.data;
+          this.uploadimg = data;
+        }
+      }
+      if (info.file.status === "error") {
+        this.$message.error("上传失败");
+      }
+    },
     onChange(dates) {
       this.activity.starttime = dates[0];
       this.activity.endtime = dates[1];
     },
     addActivity(activity) {
-      activity.avator =
-        "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=188100204,3828227675&fm=26&gp=0.jpg";
+      activity.avator = this.uploadimg;
       addActivities(activity).then(res => {
         if (res.data.code === 0) {
           this.$success({

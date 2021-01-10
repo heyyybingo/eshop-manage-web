@@ -6,7 +6,10 @@
  */
 //axios模块，导出增强的axios
 import axios from "axios";
-let url=process.env.NODE_ENV === 'production' ? '/aokimall_admin/backAdmin' : 'http://localhost:8083/aokimall_admin/backAdmin'
+let url =
+  process.env.NODE_ENV === "production"
+    ? "/aokimall_admin/backAdmin"
+    : "http://120.79.1.207:8080/aokimall_admin/backAdmin";
 const request = axios.create({
   // baseURL: "http://localhost:8088/api",
   baseURL: url,
